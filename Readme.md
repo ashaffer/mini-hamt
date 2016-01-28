@@ -30,18 +30,18 @@ hamt.get(map2, 'test') === 1
 
 ## API
 
-### hamt.empty
+### empty
 
   An empty HAMT. Use this to create your maps, by setting a key on it.
 
-### hamt.get(map, key) - Read a key
+### get(map, key) - Read a key
 
   - `map` - An existing map
   - `key` - The key you want to lookup
 
 **Returns:** The value of `key` in `map`
 
-### hamt.set(map, key, value) - Set a key/value pair
+### set(map, key, value) - Set a key/value pair
 
   - `map` - An HAMT map
   - `key` - The key you want to set
@@ -49,7 +49,7 @@ hamt.get(map2, 'test') === 1
 
 **Returns:** A new map with an entry for `key` equal to `value`.
 
-### hamt.del(map, key) - Remove a key
+### del(map, key) - Remove a key
 
   - `map` - An HAMT map
   - `key` - The key you wish to delete
