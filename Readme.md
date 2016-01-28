@@ -30,9 +30,7 @@ hamt.get(map2, 'test') === 1
 
 ## API
 
-### empty
-
-  An empty HAMT. Use this to create your maps, by setting a key on it.
+### empty - An empty HAMT. Use this to create your maps, by setting a key on it.
 
 ### get(map, key) - Read a key
 
