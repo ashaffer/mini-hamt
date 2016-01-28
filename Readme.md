@@ -3,7 +3,7 @@
 
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://github.com/feross/standard)
 
-Minimal, functional HAMT (Hash Array Mapped Trie) implementation for immutable maps. Similar to other libraries like [ImmutableJS](https://github.com/facebook/immutable-js) or [hamt](https://github.com/mattbierner/hamt), but without all the frills and associated bloat. It's other big advantage is that it doesn't use classes or prototypes, just plain data, so serialization is free and easy.
+Minimal, functional HAMT (Hash Array Mapped Trie) implementation for immutable maps. Similar to other libraries like [ImmutableJS](https://github.com/facebook/immutable-js) or [hamt](https://github.com/mattbierner/hamt), but without all the frills. Doesn't use prototypes or classes, so you don't have to do anything special to serialize it.
 
 ## Installation
 
@@ -30,16 +30,22 @@ hamt.get(map2, 'test') === 1
 
 ## API
 
-### empty - An empty HAMT. Use this to create your maps, by setting a key on it.
+### empty
 
-### get(map, key) - Read a key
+An empty HAMT. Use this to create your maps, by setting a key on it.
+
+### get(map, key)
+
+Read a key
 
   - `map` - An existing map
   - `key` - The key you want to lookup
 
 **Returns:** The value of `key` in `map`
 
-### set(map, key, value) - Set a key/value pair
+### set(map, key, value)
+
+Set a key/value pair
 
   - `map` - An HAMT map
   - `key` - The key you want to set
@@ -47,13 +53,14 @@ hamt.get(map2, 'test') === 1
 
 **Returns:** A new map with an entry for `key` equal to `value`.
 
-### del(map, key) - Remove a key
+### del(map, key)
+
+Remove a key
 
   - `map` - An HAMT map
   - `key` - The key you wish to delete
 
 **Returns**: A new map without `key`.
-
 
 ## License
 
