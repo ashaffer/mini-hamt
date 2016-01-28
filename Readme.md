@@ -16,23 +16,46 @@ Use it as an immutable map. You can set, get, and delete keys from it (no iterat
 ```javascript
 import * as hamt from 'mini-hamt'
 
-let map = hamt.empty
-
 const map = hamt.set(hamt.empty, 'test', 1)
-
 hamt.get(map, 'test') === 1
 
 const map2 = hamt.set(map, 'test2', 2)
-
 hamt.get(map2, 'test2') === 2
 hamt.get(map, 'test2') === undefined
 
-
 const map3 = hamt.del(map2, 'test')
-
 hamt.get(map3, 'test') === undefined
 hamt.get(map2, 'test') === 1
 ```
+
+## API
+
+### hamt.empty
+
+  An empty HAMT. Use this to create your maps, by setting a key on it.
+
+### hamt.get(map, key) - Read a key
+
+  - `map` - An existing map
+  - `key` - The key you want to lookup
+
+**Returns:** The value of `key` in `map`
+
+### hamt.set(map, key, value) - Set a key/value pair
+
+  - `map` - An HAMT map
+  - `key` - The key you want to set
+  - `value` - The value you want to assign to key
+
+**Returns:** A new map with an entry for `key` equal to `value`.
+
+### hamt.del(map, key) - Remove a key
+
+  - `map` - An HAMT map
+  - `key` - The key you wish to delete
+
+**Returns**: A new map without `key`.
+
 
 ## License
 
