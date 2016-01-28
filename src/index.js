@@ -48,8 +48,24 @@ function insert (node, code, key, value, depth = 0) {
           [node, createLeaf(code, key, value)]
         )
       } else {
-        const prevMask = 1 << getFrag(node.code, depth)
-        const children = prevMask < mask
+        const prevFrag = getFrag(node.code, depth)
+
+        if (prevFrag === frag) {
+          // XXX Optimize this
+          return createBranch(
+            mask,
+            [insert(
+              insert(empty, code, key, value, depth + 1),
+              node.code,
+              node.key,
+              node.value,
+              depth + 1)
+            ]
+          )
+        }
+
+        const prevMask = 1 << prevFrag
+        const children = prevFrag < frag
           ? [node, createLeaf(code, key, value)]
           : [createLeaf(code, key, value), node]
 
@@ -107,7 +123,6 @@ function get (hamt, key) {
       case BRANCH: {
         const frag = getFrag(code, depth)
         const mask = 1 << frag
-
         if (node.mask & mask) {
           const idx = popcount(node.mask, frag)
           node = node.children[idx]
@@ -117,7 +132,6 @@ function get (hamt, key) {
         }
       }
       case COLLISION: {
-        console.log('collision bucket')
         for (let i = 0, len = node.children.length; i < len; ++i) {
           const child = node.children[i]
           if (child.key === key) {

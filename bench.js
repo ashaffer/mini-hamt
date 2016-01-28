@@ -1,36 +1,49 @@
-// var hamt = require('.')
-//
-// // Crude benchmarks for now
-//
-// var strs = []
-//
-// for (var i = 0; i < 5000; i++) {
-//   strs.push(randomString())
-// }
-//
-// console.time('insert 5000')
-//
-// var map = hamt.empty
-//
-// for (var i = 0; i < 5000; i++) {
-//   map = hamt.set(map, strs[i], 1)
-// }
-//
-// console.timeEnd('insert 5000')
-//
-// console.time('lookup 5000')
-//
-// for (var i = 0; i < strs.length; i++) {
-//   if (hamt.get(map, strs[i]) !== 1) {
-//     console.log('error', i, hamt.get(map, strs[i]))
-//   }
-// }
-//
-// console.timeEnd('lookup 5000')
-//
+var hamt = require('.')
 
-var hash = require('@f/hash-str')
-var times = require('@f/times')
+// Crude benchmarks for now
+var n = 50000
+var strs = []
+
+for (var i = 0; i < n; i++) {
+  strs.push(randomString())
+}
+
+console.time('insert ' + n)
+
+var map = hamt.empty
+
+for (var i = 0; i < n; i++) {
+  map = hamt.set(map, strs[i], 1)
+}
+
+console.timeEnd('insert ' + n)
+
+console.time('lookup ' + n)
+
+for (var i = 0; i < n; i++) {
+  if (hamt.get(map, strs[i]) !== 1) {
+    console.log('error', i, hamt.get(map, strs[i]))
+  }
+}
+console.timeEnd('lookup ' + n)
+
+console.time('delete ' + (n / 2))
+
+for (var i = 0; i < (n / 2); i++) {
+  map = hamt.del(map, strs[i])
+}
+
+console.timeEnd('delete ' + (n / 2))
+
+console.time('post-delete lookup ' + (n / 2))
+
+for (var i = (n / 2); i < n; i++) {
+  if (hamt.get(map, strs[i]) !== 1) {
+    console.log('error post-delete', i, hamt.get(map, strs[i]))
+  }
+}
+
+console.timeEnd('post-delete lookup ' + (n / 2))
 
 /**
  * Use dotted path strings because that's what
@@ -38,7 +51,7 @@ var times = require('@f/times')
  */
 
 function randomString () {
-  var octets = 3 //Math.floor(Math.random() * 10)
+  var octets = Math.floor(Math.random() * 10)
   var parts = []
 
   for (var i = 0; i < octets; i++) {
@@ -47,5 +60,3 @@ function randomString () {
 
   return parts.join('.')
 }
-
-console.log(times(100, randomString).map(hash))

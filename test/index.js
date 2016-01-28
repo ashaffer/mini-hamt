@@ -51,13 +51,21 @@ test('branching', t => {
   t.end()
 })
 
-test.only('random', t => {
-  const strs = times(100, randomString)
-  let p = hamt.empty
+test('special', t => {
+  const key1 = '2.2.2.7.1.1'
+  const key2 = '8.4.9'
+  const p = hamt.set(hamt.empty, key1, 1)
+  const p2 = hamt.set(p, key2, 1)
 
-  times(strs.length, i => p = hamt.set(p, strs[i], 1))
-  times(strs.length, i => t.equal(hamt.get(p, strs[i]), 1, strs[i]))
+  t.equal(hamt.get(p, key1), 1)
+  t.equal(hamt.get(p2, key1), 1)
+  t.end()
+})
 
+test('random', t => {
+  const strs = times(10000, randomString)
+  const p = strs.reduce((p, str) => hamt.set(p, str, 1), hamt.empty)
+  strs.forEach(str => t.equal(hamt.get(p, str), 1, str))
   t.end()
 })
 

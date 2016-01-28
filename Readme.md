@@ -1,8 +1,6 @@
 
 # mini-hamt
 
-*Note: not fully working yet*
-
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://github.com/feross/standard)
 
 Minimal, functional HAMT (Hash Array Mapped Trie) implementation for immutable maps. Similar to other libraries like [ImmutableJS](https://github.com/facebook/immutable-js) or [hamt](https://github.com/mattbierner/hamt), but without all the frills and associated bloat. It's other big advantage is that it doesn't use classes or prototypes, just plain data, so serialization is free and easy.

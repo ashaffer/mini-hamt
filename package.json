@@ -10,7 +10,10 @@
     "postpublish": "make clean",
     "postversion": "git push && git push --tags && npm publish --access=public"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@f/hash-str": "^1.0.0",
+    "@f/popcount": "^1.0.0"
+  },
   "devDependencies": {
     "@f/times": "^1.0.0",
     "babel-preset-es2015": "^6.1.2",
