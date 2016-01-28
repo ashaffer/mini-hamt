@@ -62,6 +62,29 @@ Remove a key
 
 **Returns**: A new map without `key`.
 
+
+## Performance
+
+5,000 ops:
+
+```
+insert 5000: 9ms
+lookup 5000: 2ms
+delete 2500: 2ms
+post-delete lookup 2500: 0ms
+```
+
+50,000 ops:
+
+```
+insert 50000: 58ms
+lookup 50000: 14ms
+delete 25000: 29ms
+post-delete lookup 25000: 7ms
+```
+
+You can run them yourself by running `babel src --out-dir lib && node bench.js`
+
 ## License
 
 MIT

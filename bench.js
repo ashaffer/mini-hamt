@@ -1,7 +1,7 @@
 var hamt = require('.')
 
 // Crude benchmarks for now
-var n = 50000
+var n = 5000
 var strs = []
 
 for (var i = 0; i < n; i++) {
