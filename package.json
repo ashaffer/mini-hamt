@@ -2,7 +2,7 @@
   "name": "mini-hamt",
   "description": "Minimal HAMT (Hash Array Mapped Trie) implementation for immutable maps",
   "repository": "git://github.com/ashaffer/mini-hamt.git",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "license": "MIT",
   "main": "lib/index.js",
   "scripts": {
