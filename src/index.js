@@ -153,10 +153,9 @@ function get (hamt, key) {
 function del (hamt, key) {
   const code = hash(key)
   const res = remove(hamt, code, key, 0)
-
-  return res === undefined
-    ? hamt
-    : res
+  if (res === undefined) return hamt
+  if (res === null) return empty
+  return res
 }
 
 function remove (node, code, key, depth) {

@@ -103,6 +103,12 @@ test('collisions', t => {
   t.end()
 })
 
+test('delete all keys', t => {
+  let p = hamt.set(hamt.empty, 'test', 1)
+  t.equal(hamt.del(p, 'test'), hamt.empty)
+  t.end()
+})
+
 /**
  * Helpers
  */
