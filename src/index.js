@@ -192,7 +192,10 @@ function remove (node, code, key, depth) {
         } else if (res === undefined) {
           return undefined
         } else {
-          return createBranch(node.mask, node.children)
+          return createBranch(
+            node.mask,
+            arrayReplace(node.children, idx, res)
+          )
         }
       } else {
         return undefined

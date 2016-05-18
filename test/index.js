@@ -112,8 +112,16 @@ test('collisions', t => {
 })
 
 test('delete all keys', t => {
-  let p = hamt.set(hamt.empty, 'test', 1)
-  t.equal(hamt.del(p, 'test'), hamt.empty)
+  const strs = unique(times(1000, randomString))
+  const p = strs.reduce((p, str, i) => hamt.set(p, str, i), hamt.empty)
+
+  strs.reduce((p, str, i) => {
+    t.equal(hamt.get(p, str), i)
+    p = hamt.del(p, str)
+    t.equal(hamt.get(p, str), undefined)
+    return p
+  }, p)
+
   t.end()
 })
 
