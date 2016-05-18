@@ -31,6 +31,14 @@ test('should work', t => {
   t.end()
 })
 
+test('should throw if an invalid hamt is passed', t => {
+  t.throws(() => hamt.set({a: 1}, 'test', 1))
+  t.throws(() => hamt.get({a: 1}, 'test'))
+  t.throws(() => hamt.del({a: 1}, 'test'))
+
+  t.end()
+})
+
 test('branching', t => {
   // These two keys fall into the same first
   // bucket

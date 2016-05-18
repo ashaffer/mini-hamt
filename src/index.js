@@ -28,6 +28,8 @@ const COLLISION = 'COLLISION'
 const empty = createBranch()
 
 function set (hamt, key, value) {
+  validate(hamt)
+
   const code = hash(key)
   return insert(hamt, code, key, value)
 }
@@ -112,6 +114,8 @@ function insert (node, code, key, value, depth = 0) {
 }
 
 function get (hamt, key) {
+  validate(hamt)
+
   const code = hash(key)
   let node = hamt
   let depth = -1
@@ -151,6 +155,8 @@ function get (hamt, key) {
 }
 
 function del (hamt, key) {
+  validate(hamt)
+
   const code = hash(key)
   const res = remove(hamt, code, key, 0)
   if (res === undefined) return hamt
@@ -264,6 +270,12 @@ function arrayReplace (arr, idx, item) {
 
 function getFrag (code, depth) {
   return (code >>> (4 * depth)) & mask
+}
+
+function validate (branch) {
+  if (branch.type !== BRANCH) {
+    throw new Error('mini-hamt: invalid HAMT passed to mini-hamt')
+  }
 }
 
 /**
